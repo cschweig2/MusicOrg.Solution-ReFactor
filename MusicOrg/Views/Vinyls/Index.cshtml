@@ -1,0 +1,23 @@
+@{
+    Layout = "_Layout";
+}
+
+@using MusicOrg.Models;
+@model List<MusicOrg.Models.Vinyls>;
+
+<h1>Vinyls In Your Collection</h1>
+
+@if (@Model.Count == 0)
+{
+    <h3>No vinyls have been added</h3>
+}
+
+<ul>
+@foreach(Vinyl vinyl in Model)
+{
+    <li>@Html.ActionLink($"{vinyl.Title}", "Details", new { id = vinyl.VinylId})</li>
+}
+</ul>
+
+<p>@Html.ActionLink("Create new vinyl", "Create")</p>
+<p>@Html.ActionLink("Back to home page", "Index", "Home")</p>

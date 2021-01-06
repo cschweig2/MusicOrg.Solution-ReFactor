@@ -6,50 +6,36 @@ namespace MusicOrg.Controllers
 {
     public class VinylsController : Controller
     {
-        [HttpGet("/vinyl")]
-        public ActionResult Index()
+        private readonly MusicOrgContext _db;
+
+        public VinylsController(MusicOrgContext db)
         {
-          List<Vinyl> newVinylList = Vinyl.GetAll();
-          return View(newVinylList);
+          _db = db;
         }
 
-
-        [HttpGet("/vinyl/new")]
-        public ActionResult New()
+        public ActionResult Index()
         {
+          return View(_db.Vinyls.ToList());
+        }
+
+        public ActionResult Create()
+        {
+          ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
           return View();
         }
 
-        [HttpPost("/vinyl")]
-        public ActionResult Create(string album, string artist)
+        [HttpPost]
+        public ActionResult Create(Vinyl vinyl, int ArtistId)
         {
-          public bool exist = false;
-          for (int i=0; i < Artist._instances.Count; i++)
-            {   
-                Artist current = Artist._instances[i];
-                if(current.Name == artist.ToLower)
-                {
-                  Vinyl newVinyl = new Vinyl(album);
-                  Artist._instances[i].Records.Add(newVinyl.ToLower);
-                  exist = true;
-                } 
-                else 
-                {
-                  exist = false;
-                }
-            }
-          if(exist == true)
-            {
-              return RedirectToAction("Index");
-            }
-          else
-            {
-              Artist newArtist = new Artist(artist.ToLower);
-              Vinyl newVinyl = new Vinyl(album.ToLower);
-              Artist._instances[newArtist.Id].Records.Add(newVinyl);
-              return RedirectToAction("Index");
-            }
+          _db.Vinyls.Add(vinyl);
+          if (ArtistId != 0)
+          {
+            _db.ArtistVinyl.Add(new ArtistVinyl() { ArtistId = ArtistId, VinylId = vinyl.VinylId});
+          }
+          _db.SaveChanges();
+          return RedirectToAction("Index");
         }
+
     }
 }
 
