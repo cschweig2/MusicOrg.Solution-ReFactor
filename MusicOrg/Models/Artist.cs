@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace MusicOrg.Models
 {
@@ -7,7 +9,7 @@ namespace MusicOrg.Models
     {
         public Artist()
         {
-            this.Artists = new HashSet<ArtistVinyl>();
+            this.Vinyls = new HashSet<ArtistVinyl>();
         }
 
         public int ArtistId { get; set; }

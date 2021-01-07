@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MusicOrg.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MusicOrg.Controllers
 {

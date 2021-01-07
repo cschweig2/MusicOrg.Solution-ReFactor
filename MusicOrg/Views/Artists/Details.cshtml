@@ -1,0 +1,27 @@
+@{
+    Layout = "_Layout";
+}
+
+@model MusicOrg.Models.Artist
+
+<h1>Artist Details</h1>
+<br>
+<h3>Artist Name: @Html.DisplayFor(model => model.Name)</h3>
+
+@if (@Model.Vinyls.Count == 0)
+{
+    <p>This Artist has not been associated with any albums</p>
+}
+else
+{
+    <h3>Albums</h3>
+    <ul>
+        @foreach (var join in Model.Vinyls)
+        {
+            <li>@join.Vinyl.Title</li>
+        }
+    </ul>
+}
+<p>@Html.ActionLink("Edit this artist", "Edit", new { id = Model.ArtistId })</p>
+<p>@Html.ActionLink("Back to artist list", "Index", new { id = Model.ArtistId })</p>
+<p>@Html.ActionLink("Back to home", "Index", "Home")</p>

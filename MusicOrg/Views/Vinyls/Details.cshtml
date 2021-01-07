@@ -1,0 +1,28 @@
+@{
+    Layout = "_Layout";
+}
+
+@model MusicOrg.Models.Vinyl
+
+<h1>Vinyl Details</h1>
+<br>
+<h3>Vinyl Title: @Html.DisplayFor(model => model.Title)</h3>
+
+@if (@Model.Artists.Count == 0)
+{
+    <p>This vinyl has not been associated with any artists</p>
+}
+else
+{
+    <h3>Artist</h3>
+    <ul>
+        @foreach (var join in Model.Artists)
+        {
+            <li>@join.Artist.Name</li>
+        }
+    </ul>
+}
+<p>@Html.ActionLink("Edit this vinyl", "Edit", new { id = Model.VinylId })</p>
+<p>@Html.ActionLink("Delete this vinyl", "Delete", new { id = Model.VinylId })</p>
+<p>@Html.ActionLink("Back to vinyl list", "Index")</p>
+<p>@Html.ActionLink("Back to home", "Index", "Home")</p>

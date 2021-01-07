@@ -1,0 +1,20 @@
+@{
+    Layout = "_Layout";
+}
+
+@model MusicOrg.Models.Vinyl
+
+<h1>Add a new vinyl</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title)
+
+    @Html.Label("Select artist")
+    @Html.DropDownList("ArtistId")
+
+    <input type="submit" value="Add new vinyl" class="btn">
+}
+<p>@Html.ActionLink("Back to vinyl list", "Index")</p>
+<p>@Html.ActionLink("Back to home", "Index", "Home")</p>

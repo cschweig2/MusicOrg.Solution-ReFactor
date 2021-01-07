@@ -2,3 +2,17 @@
     Layout = "_Layout";
 }
 
+@model MusicOrg.Models.Artist
+
+<h1>Add a new artist</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
+
+    <input type="submit" value="Add new artist" class="btn">
+}
+
+<p>@Html.ActionLink("Back to artist list", "Index")</p>
+<p>@Html.ActionLink("Back to home", "Index", "Home")</p>
