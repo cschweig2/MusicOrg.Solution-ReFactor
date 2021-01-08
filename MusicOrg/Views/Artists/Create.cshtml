@@ -4,14 +4,16 @@
 
 @model MusicOrg.Models.Artist
 
-<h1>Add a new artist</h1>
+<h1 class="capital-text">Add a new artist</h1>
 
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name)
 
-    <input type="submit" value="Add new artist" class="btn">
+    @Html.LabelFor(model => model.Description)
+    @Html.TextBoxFor(model => model.Description)
+    <input class="btn" type="submit" value="Add new artist">
 }
 
 <p>@Html.ActionLink("Back to artist list", "Index")</p>

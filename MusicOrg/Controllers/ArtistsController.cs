@@ -33,6 +33,44 @@ namespace MusicOrg.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(int id)
+        {
+            var thisArtist = _db.Artists
+                .Include(artist => artist.Vinyls)
+                .ThenInclude(join => join.Vinyl)
+                .FirstOrDefault(artist => artist.ArtistId == id);
+            return View(thisArtist);
+        }
+
+        
+
+
+
+
+        public ActionResult Delete(int id)
+        {
+            var thisArtist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
+            return View(thisArtist);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var thisArtist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
+            _db.Artists.Remove(thisArtist);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteVinyl(int joinId)
+        {
+            var joinEntry = _db.ArtistVinyl.FirstOrDefault(entry => entry.ArtistVinylId == joinId);
+            _db.ArtistVinyl.Remove(joinEntry);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 
 }

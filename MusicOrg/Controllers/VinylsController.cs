@@ -28,9 +28,10 @@ namespace MusicOrg.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Vinyl vinyl, int ArtistId)
+        public ActionResult Create(Vinyl vinyl, Artist artist, int ArtistId)
         {
           _db.Vinyls.Add(vinyl);
+          _db.Artists.Add(artist);
           if (ArtistId != 0)
           {
             _db.ArtistVinyl.Add(new ArtistVinyl() { ArtistId = ArtistId, VinylId = vinyl.VinylId});
@@ -89,6 +90,24 @@ namespace MusicOrg.Controllers
             _db.ArtistVinyl.Remove(joinEntry);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AddArtist(int id)
+        {
+          var thisVinyl = _db.Vinyls.FirstOrDefault(vinyls => vinyls.VinylId == id);
+          ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+          return View(thisVinyl);
+        }
+
+        [HttpPost]
+        public ActionResult AddArtist(Vinyl vinyl, int ArtistId)
+        {
+          if (ArtistId != 0)
+          {
+            _db.ArtistVinyl.Add(new ArtistVinyl() { ArtistId = ArtistId, VinylId = vinyl.VinylId});
+          }
+          _db.SaveChanges();
+          return RedirectToAction("Index");
         }
 
     }

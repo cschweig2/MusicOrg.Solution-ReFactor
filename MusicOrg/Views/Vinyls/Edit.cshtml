@@ -4,7 +4,7 @@
 
 @model MusicOrg.Models.Vinyl
 
-<h1>Edit Vinyl</h1>
+<h1 class="capital-text">Edit Vinyl</h1>
 <h4>Vinyl being edited: @Html.DisplayFor(model => model.Title)</h4>
 
 @using (Html.BeginForm())
@@ -19,16 +19,6 @@
 
     <input type="submit" value="Save"/>
 }
-<ul>
-    @foreach (var join in Model.Artists)
-    {
-        <li>Would you like to remove this artist: @join.Artist.Name ?</li>
-        @using (Html.BeginForm("DeleteArtist", "Vinyls"))
-        {
-            @Html.Hidden("JoinId", @join.ArtistVinylId)
-            <input type="submit" value="delete"/>
-        }
-    }
-</ul>
+
 <p>@Html.ActionLink("Back to vinyl list", "Index")</p>
 <p>@Html.ActionLink("Back to home", "Index", "Home")</p>

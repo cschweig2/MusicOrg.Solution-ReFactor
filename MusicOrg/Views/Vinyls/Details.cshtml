@@ -2,11 +2,13 @@
     Layout = "_Layout";
 }
 
+@using MusicOrg.Models
 @model MusicOrg.Models.Vinyl
 
-<h1>Vinyl Details</h1>
-<br>
+<h1 class="capital-text">Vinyl Details</h1>
+<hr>
 <h3>Vinyl Title: @Html.DisplayFor(model => model.Title)</h3>
+<hr>
 
 @if (@Model.Artists.Count == 0)
 {
@@ -15,14 +17,21 @@
 else
 {
     <h3>Artist</h3>
-    <ul>
-        @foreach (var join in Model.Artists)
+    @foreach (var join in Model.Artists)
+    {
+        <p>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = join.Artist.ArtistId })</p><br>
+        <p>Would you like to remove this artist: @join.Artist.Name ?</p>
+        @using (Html.BeginForm("DeleteArtist", "Vinyls"))
         {
-            <li>@join.Artist.Name</li>
+            @Html.Hidden("joinId", @join.ArtistVinylId)
+            <input type="submit" value="remove" class="btn btn-danger" />
         }
-    </ul>
+    }
 }
+<br>
+<br>
 <p>@Html.ActionLink("Edit this vinyl", "Edit", new { id = Model.VinylId })</p>
 <p>@Html.ActionLink("Delete this vinyl", "Delete", new { id = Model.VinylId })</p>
+<p>@Html.ActionLink("Add an artist to this vinyl", "AddArtist", new { id = Model.VinylId })</p>
 <p>@Html.ActionLink("Back to vinyl list", "Index")</p>
 <p>@Html.ActionLink("Back to home", "Index", "Home")</p>

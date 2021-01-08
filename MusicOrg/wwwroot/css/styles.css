@@ -1,4 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&display=swap');
+
 body {
-    background-color: rgb(48, 48, 87);
-    color: rgb(129, 129, 129);
+    background-color: #296620;
+    color: rgb(49, 49, 49);
+}
+
+body.red {
+    background-color: rgb(104, 0, 0);
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: rgb(49, 49, 49);
+    border-style: double;
+    padding: 20px;
+    max-width: 40%;
+    text-align: center;
+}
+
+a:link, a:hover, a:visited{
+    color: rgb(19, 19, 19);
+    font-family: 'Comfortaa', cursive;
+    font-style: oblique;
+}
+
+p, h2, h3, h4 {
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2, h3, h4 {
+    font-weight: bold;
+}
+
+.capital-text {
+    font-family: 'Bebas Neue', cursive;
+}
+
+img {
+    max-width: 25%;
+}
+
+ul {
+    list-style-type: none;
+    align-items: center;
+}
+
+.list-items {
+    text-align: center;
 }

@@ -1,0 +1,20 @@
+@{
+  Layout = "_Delete";
+}
+
+@model MusicOrg.Models.Artist
+
+<h2 class="capital-text">Are sure you want to delete this artist?</h2>
+<p>I mean, they will always be a part of your soul,</p>
+<p>Etched in like grooves in vinyl,</p>
+<p>Always embarassingly there, just saying...</p>
+<p>Unless its Nickelback, you should probably</p>
+<p>try to forget that phase in your life, eek!</p>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete (#neverforget)"/>
+}
+<p>@Html.ActionLink("Back to artist list", "Index")</p>
+<p>@Html.ActionLink("Back to home", "Index", "Home")</p>

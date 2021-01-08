@@ -4,9 +4,12 @@
 
 @model MusicOrg.Models.Artist
 
-<h1>Artist Details</h1>
-<br>
-<h3>Artist Name: @Html.DisplayFor(model => model.Name)</h3>
+<h1 class="capital-text">Artist</h1>
+<hr>
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+<hr>
+<p>@Html.DisplayFor(model => model.Description)</p>
+<hr>
 
 @if (@Model.Vinyls.Count == 0)
 {
@@ -14,14 +17,21 @@
 }
 else
 {
-    <h3>Albums</h3>
-    <ul>
+    <h4>Albums</h4>
+
         @foreach (var join in Model.Vinyls)
         {
-            <li>@join.Vinyl.Title</li>
+            @using (Html.BeginForm("DeleteVinyl", "Artists"))
+            {
+                <p>@Html.ActionLink($"{join.Vinyl.Title}", "Details", "Vinyls", new { id =  join.Vinyl.VinylId })
+                @Html.Hidden("joinId", @join.ArtistVinylId)
+                <input class="btn btn-danger" type="submit" value="x" /></p>
+            }
         }
-    </ul>
+
+    <hr>
 }
-<p>@Html.ActionLink("Edit this artist", "Edit", new { id = Model.ArtistId })</p>
-<p>@Html.ActionLink("Back to artist list", "Index", new { id = Model.ArtistId })</p>
+<p>@Html.ActionLink("Edit artist", "Edit", new { id = Model.ArtistId })</p>
+<p>@Html.ActionLink("Delete artist", "Delete", new { id = Model.ArtistId })</p>
+<p>@Html.ActionLink("Back to artist list", "Index")</p>
 <p>@Html.ActionLink("Back to home", "Index", "Home")</p>
